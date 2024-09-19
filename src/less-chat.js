@@ -30,6 +30,7 @@ Hooks.once("init", () => {
     // New methods
     ChatLog.prototype.prune = prune;
     ChatLog.prototype.schedulePrune = schedulePrune;
+    ChatLog.prototype.updateMax = updateMax;
 
     // Replaced existing methods
     ChatLog.prototype.postOne = postOne;
