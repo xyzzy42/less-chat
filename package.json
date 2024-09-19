@@ -1,0 +1,25 @@
+{
+  "name": "less-chat",
+  "version": "0.1.0",
+  "description": "Reduce numer of chat messages rendered in the log at once time",
+  "main": "src/less-chat.js",
+  "scripts": {
+    "build": "make package",
+    "format": "prettier --write src static"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xyzzy42/less-chat.git"
+  },
+  "author": "Trent Piepho",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/xyzzy42/less-chat/issues"
+  },
+  "homepage": "https://github.com/xyzzy42/less-chat#README.md",
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "pretty": "^2.0.0",
+    "rollup": "^4.20.0"
+  }
+}
