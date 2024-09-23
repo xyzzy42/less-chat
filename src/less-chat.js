@@ -198,7 +198,10 @@ function deleteMessage(messageId, { deleteAll = false } = {}) {
         }
 
         // Remove the deleted message
-        li.slideUp(100, () => li.remove());
+        li.slideUp(100, () => {
+            li.remove();
+            this.updateMax(); // Maybe add one to the top after deleting one
+        });
 
         // Delete from popout tab
         if (this._popout) this._popout.deleteMessage(messageId, { deleteAll });
