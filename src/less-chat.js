@@ -101,12 +101,11 @@ function _onScrollLog(event) {
     // except as an unused argument to game.messages.flush().
 
     const log = event.target;
-    if (log.scrollTop < 100) {
+    this.isAtBottom = log.scrollHeight - log.clientHeight - log.scrollTop <= 1;
+    if (!this.isAtBottom && log.scrollTop < 100) {
         // Close to top, render new messages
-        console.log(`scrolled to ${log.scrollTop}, while rendering is {this.renderingBatch}`);
         this._renderBatch(this.element, CONFIG.ChatMessage.batchSize);
     }
-    this.isAtBottom = log.scrollHeight - log.clientHeight - log.scrollTop <= 1;
     this._jumpToBottomElement.classList.toggle("hidden", this.isAtBottom);
 }
 
