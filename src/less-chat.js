@@ -177,9 +177,9 @@ async function _renderBatch(html, size) {
             // Prepend the HTML
             html.find("#chat-log, #chat-log-popout").prepend(msgs);
             this._lastId = messages[targetIdx].id;
-            this.renderingBatch = false;
-            this.schedulePrune(5000);
         }
+        this.renderingBatch = false;
+        this.schedulePrune(5000);
     });
 }
 
