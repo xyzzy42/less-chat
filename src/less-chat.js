@@ -175,7 +175,10 @@ async function _renderBatch(html, size) {
             }
 
             // Prepend the HTML
-            html.find("#chat-log, #chat-log-popout").prepend(msgs);
+            for (const log of html.find("#chat-log, #chat-log-popout")) {
+                if (log.scrollTop === 0) log.scrollTo({ top: 1, behavior: "instant" });
+                $(log).prepend(msgs);
+            }
             this._lastId = messages[targetIdx].id;
         }
         this.renderingBatch = false;
