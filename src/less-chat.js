@@ -78,7 +78,7 @@ async function updateMax() {
 
 function prune() {
     const msgList = this.element.find("#chat-log");
-    if (msgList[0].childElementCount > game.settings.get(MODULENAME, "chatRenderedMax")) {
+    if (msgList[0]?.childElementCount > game.settings.get(MODULENAME, "chatRenderedMax")) {
         if (!this.isAtBottom) {
             // Call back at a better time
             this.schedulePrune(1000);
