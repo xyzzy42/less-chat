@@ -104,7 +104,13 @@ function prune() {
                 if (msg) msg.logged = false;
             });
             toRemove.remove();
-            this._lastId = msgList[0].firstChild?.dataset.messageId || null;
+            this._lastId = (() => {
+                for (const next of msgList.children()) {
+                    // Find first <li> in the <ul> that is NOT in the process of being deleted
+                    if (game.messages.get(next.dataset.messageId)?.logged) return next.dataset.messageId;
+                }
+                return null;
+            })();
         });
     }
 }
@@ -211,8 +217,13 @@ function deleteMessage(messageId, { deleteAll = false } = {}) {
         if (deleteAll) {
             this._lastId = null;
         } else if (messageId === this._lastId) {
-            const next = li[0].nextElementSibling;
-            this._lastId = next ? next.dataset.messageId : null;
+            this._lastId = (() => {
+                for (const next of li.nextAll()) {
+                    // Find next <li> in the <ul> that is NOT in the process of being deleted
+                    if (game.messages.get(next.dataset.messageId)?.logged) return next.dataset.messageId;
+                }
+                return null;
+            })();
         }
 
         // Remove the deleted message
