@@ -23,8 +23,7 @@ Hooks.once("init", () => {
         requiresReload: false,
         type: Number,
         default: 20,
-        onChange: (...args) => {
-            console.log("args to onChange", ...args);
+        onChange: () => {
             CONFIG.ChatMessage.batchSize = game.settings.get(MODULENAME, "chatRenderedBatch");
         },
     });
