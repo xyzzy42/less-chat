@@ -33,6 +33,7 @@ Hooks.once("init", () => {
     // New methods
     ChatLog.prototype.prune = prune;
     ChatLog.prototype.schedulePrune = schedulePrune;
+    ChatLog.prototype.scheduleExpand = scheduleExpand;
     ChatLog.prototype.updateMax = updateMax;
 
     // Replaced existing methods
@@ -62,6 +63,17 @@ function schedulePrune(timeout = 250) {
     this.pruneTimeout = window.setTimeout(() => {
         this.pruneTimeout = null;
         this.prune();
+    }, timeout);
+}
+
+function scheduleExpand(timeout = 250) {
+    if (this.expandTimeout) {
+        window.clearTimeout(this.expandTimeout);
+        this.expandTimeout = null;
+    }
+    this.expandTimeout = window.setTimeout(() => {
+        this.expandTimeout = null;
+        this.updateMax();
     }, timeout);
 }
 
@@ -206,7 +218,9 @@ function deleteMessage(messageId, { deleteAll = false } = {}) {
         // Remove the deleted message
         li.slideUp(100, () => {
             li.remove();
-            this.updateMax(); // Maybe add one to the top after deleting one
+            // Maybe add one to the top after deleting one, but don't do it immediately as often new messages will get
+            // added shortly afterward.
+            this.scheduleExpand();
         });
 
         // Delete from popout tab
