@@ -122,7 +122,9 @@ function _onScrollLog(event) {
     // except as an unused argument to game.messages.flush().
 
     const log = event.target;
-    this.isAtBottom = log.scrollHeight - log.clientHeight - log.scrollTop <= 1;
+    // While comparing <= 1 should work, empirical evidence shows that some browsers aren't
+    // rounding correctly and a larger epsilon is needed to account for the round off error.
+    this.isAtBottom = log.scrollHeight - log.clientHeight - log.scrollTop < 2;
     if (!this.isAtBottom && log.scrollTop < 100) {
         // Close to top, render new messages
         this._renderBatch(this.element, CONFIG.ChatMessage.batchSize);
