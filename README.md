@@ -20,3 +20,13 @@ in the chat log scrolling window at one time during normal use.
 The settings for the module allows the number of messages kept rendered in the
 log to be configured.  The Foundry default is 100.  And the number rendered in
 each batch when the log is scrolled to the top can be changed too.
+
+### Limitations
+
+It's possible to whisper a reply to the last whisper a player received by using
+the chat command `/reply`.  This module breaks that chat feature.
+
+Due to the extensive use of private variables by Foundry to prevent modules from
+making changes, I'd have to double the size of the module just to support this
+feature.  I think few people use, or even know about, this reply feature, so I
+haven't done that.
