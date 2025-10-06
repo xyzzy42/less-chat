@@ -356,7 +356,7 @@ function deleteMessage(messageId, { deleteAll = false } = {}) {
         } else if (messageId === this._lastId) {
             this._lastId = (() => {
                 let next = li;
-                while ((next = next.nextElementSibling())) {
+                while ((next = next.nextElementSibling)) {
                     // Find next <li> in the <ul> that is NOT in the process of being deleted
                     if (game.messages.get(next.dataset.messageId)?.logged) return next.dataset.messageId;
                 }
