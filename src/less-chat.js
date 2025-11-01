@@ -221,9 +221,8 @@ async function _rerenderMessage(message, existing, options = {}) {
     // methods.  It would also fail to copy listeners attached by a module, since it didn't know
     // about them.
     existing.replaceChildren(...replacement.childNodes);
-    if ("_lifeSpan" in existing) {
-        replacement._lifeSpan = existing._lifeSpan;
-    }
+    // Copy the class list of the new li too
+    existing.className = replacement.className;
 }
 
 function _onScrollLog(event) {
